@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>SistemaComercialJSP</display-name>
+  <welcome-file-list>
+    <welcome-file>/SiscomController</welcome-file>
+  </welcome-file-list>
+  
+   <servlet>					  
+    <description></description>		          
+    <display-name>SiscomController</display-name> 
+    <servlet-name>SiscomController</servlet-name>  
+    <servlet-class>ar.iariel.siscom.controller.SiscomController</servlet-class> 	
+  </servlet>					   
+
+
+  <servlet-mapping>				   
+    <servlet-name>SiscomController</servlet-name>   
+    <url-pattern>/SiscomController</url-pattern>   
+  </servlet-mapping>	
+  
+  <filter>
+  <filter-name>UsuarioAutorizado</filter-name>
+  <filter-class>ar.iariel.siscom.controller.UsuarioAutorizadoFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>UsuarioAutorizado</filter-name>
+  	<url-pattern>*</url-pattern>
+  </filter-mapping>
+</web-app>
