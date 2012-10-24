@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- File : proveedor.hbm.xml (hbm es hibernate mapping) 
+    Date : 22/10/2012
+    Created by : Ariel Duarte 
+	Description : Mapeo a la Tabla ubicacion -->
+<hibernate-mapping>
+	<class name="ar.iariel.siscom.model.bean.Ubicacion" table="ubicacion">
+		<id name="codigo" type="int" column="ubica_codigo">
+			<generator class="native"></generator>
+		</id>
+		<property name="nombre"/>
+	</class>
+</hibernate-mapping>
+
+
+
+
