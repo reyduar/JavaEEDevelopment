@@ -1,17 +1,27 @@
 package ar.iariel.siscom.model.bean;
 
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 /**
- * 
+ * Date : 07/10/2012
  * @author Ariel Duarte
  *
  */
+@Entity
+@Table(name="ciudad")
 public class Ciudad {
-
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ciu_codigo")
 	private Integer codigo;
+	@Column(name="ciu_nombre")
 	private String nombre;
-	
-	private List<Proveedor> proveedores ;
 	
 	public Integer getCodigo() {
 		return codigo;
@@ -25,12 +35,14 @@ public class Ciudad {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public List<Proveedor> getProveedores() {
-		return proveedores;
-	}
-	public void setProveedores(List<Proveedor> proveedores) {
-		this.proveedores = proveedores;
-	}
+	
+//private List<Proveedor> proveedores ;
+//	public List<Proveedor> getProveedores() {
+//		return proveedores;
+//	}
+//	public void setProveedores(List<Proveedor> proveedores) {
+//		this.proveedores = proveedores;
+//	}
 	
 	
 	

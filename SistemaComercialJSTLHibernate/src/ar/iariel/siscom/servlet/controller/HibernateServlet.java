@@ -18,6 +18,7 @@ import ar.iariel.siscom.model.dao.HibernateDAO;
 import ar.iariel.siscom.util.HibernateUtil;
 
 /**
+ * Date 11/10/2012
  * @author Ariel Duarte
  * Servlet implementation class HibernateServlet
  */
@@ -30,9 +31,9 @@ public class HibernateServlet extends HttpServlet {
      */
     public HibernateServlet() {
         super();
-        HibernateDAO<Proveedor> proveedorDAO = new HibernateDAO<Proveedor>(Proveedor.class);
-        HibernateDAO<Ciudad> ciudadDAO = new HibernateDAO<Ciudad>(Ciudad.class);
-        Ciudad ciudadBean = new Ciudad();
+//        HibernateDAO<Proveedor> proveedorDAO = new HibernateDAO<Proveedor>(Proveedor.class, (Session) request.getAttribute(HibernateUtil.HIBERNATE_SESSION));
+//        HibernateDAO<Ciudad> ciudadDAO = new HibernateDAO<Ciudad>(Ciudad.class, (Session) request.getAttribute(HibernateUtil.HIBERNATE_SESSION));
+//        Ciudad ciudadBean = new Ciudad();
 
           /* Para Proveedores */
 //        ciudadBean.setCodigo(10);

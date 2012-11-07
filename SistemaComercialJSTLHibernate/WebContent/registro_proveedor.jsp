@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-	<%@ page import="java.util.List, ar.iariel.siscom.model.bean.Ciudad"%>
+<%-- 	<%@ page import="java.util.List, ar.iariel.siscom.model.bean.Ciudad"%> --%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,40 +24,40 @@
 					
 					<label for="nombre" >Nombre*</label>
 					<div class="div_texbox">
-						<input type="text" name="nombre" id="nombre" value="${proveedor.pro_razon}"/>
+						<input type="text" name="nombre" id="nombre" value="${proveedor.nombre}"/>
 					</div>
 										
 					<label for="ruc" >Ruc*</label>
 					<div class="div_texbox">
-						<input type="text" name="ruc" id="ruc" value="${proveedor.pro_ruc}"/>
+						<input type="text" name="ruc" id="ruc" value="${proveedor.ruc}"/>
 					</div>
 					<label for="pais">Pais*</label>
 					<div class="div_texbox">
-						<input type="text" name="pais" id="pais" value="${proveedor.pais_codigo}"/>
+						<input type="text" name="pais" id="pais" value="${proveedor.pais}"/>
 					</div>
 					<label for="ciudad">Ciudad*</label>
 					<div class="div_texbox">
-						<input type="text" name="ciudad" id="ciudad" value="${proveedor.ciu_codigo}"/>
+						<input type="text" name="ciudad" id="ciudad" value="${proveedor.ciudad}"/>
 					</div>
 					<label for="direccion">Dirección*</label>
 					<div class="div_texbox">
-						<input type="text" name="direccion" id="direccion" value="${proveedor.pro_direc}"/>
+						<input type="text" name="direccion" id="direccion" value="${proveedor.direccion}"/>
 					</div>
 					<label for="telefono">Teléfono*</label>
 					<div class="div_texbox">
-						<input type="text" name="telefono" id="telefono" value="${proveedor.pro_telef}"/>
+						<input type="text" name="telefono" id="telefono" value="${proveedor.telefono}"/>
 					</div>
 					<label for="fax">Celular</label>
 					<div class="div_texbox">
-						<input type="text" name="fax" id="fax" value="${proveedor.pro_fax}"/>
+						<input type="text" name="fax" id="fax" value="${proveedor.fax}"/>
 					</div>
 					<label for="email">e-mail</label>
 					<div class="div_texbox">
-						<input type="text" name="email" id="email" value="${proveedor.pro_mail}"/>
+						<input type="text" name="email" id="email" value="${proveedor.email}"/>
 					</div>
 					<label for="tipo">Tipo de proveedor</label>
 					<div class="div_texbox">
-						<input type="text" name="tipo" id="tipo" value="${proveedor.pro_iva}"/>
+						<input type="text" name="tipo" id="tipo" value="${proveedor.tipo}"/>
 					</div>
 					<div class="button_div" >
 						<input name="guardar" type="submit" value="Guardar" class="buttons"/>
@@ -65,9 +65,10 @@
 				</form>
 			</fieldset>
 		</div>
-		<div id="rightSide">
+		
+	</div>
+	<div id="rightSide">
 			<c:import url="menu.jsp"></c:import>
 		</div>
-	</div>
 </body>
 </html>

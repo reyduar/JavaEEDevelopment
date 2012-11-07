@@ -24,13 +24,14 @@
     <property name="hibernate.format_sql">true</property>
     <property name="hibernate.pool_sizel">10</property>
     <property name="org.hibernate">true</property>
-    <mapping resource="ar/iariel/siscom/model/bean/Proveedor.hbm.xml"/>
-    <mapping resource="ar/iariel/siscom/model/bean/Marca.hbm.xml"/>
-    <mapping resource="ar/iariel/siscom/model/bean/Pais.hbm.xml"/>
-    <mapping resource="ar/iariel/siscom/model/bean/Grupo.hbm.xml"/>
-    <mapping resource="ar/iariel/siscom/model/bean/Ubicacion.hbm.xml"/>
-    <mapping resource="ar/iariel/siscom/model/bean/TipoGrupo.hbm.xml"/>
-    <mapping resource="ar/iariel/siscom/model/bean/Ciudad.hbm.xml"/>
+    <mapping class="ar.iariel.siscom.model.bean.Proveedor"/>
+    <mapping class="ar.iariel.siscom.model.bean.Marca"/>
+    <mapping class="ar.iariel.siscom.model.bean.Pais"/>
+    <mapping class="ar.iariel.siscom.model.bean.Grupo"/>
+    <mapping class="ar.iariel.siscom.model.bean.Ubicacion"/>
+    <mapping class="ar.iariel.siscom.model.bean.TipoGrupo"/>
+    <mapping class="ar.iariel.siscom.model.bean.Ciudad"/>
+    <mapping class="ar.iariel.siscom.model.bean.Articulo"/>
   </session-factory>
 </hibernate-configuration>
 

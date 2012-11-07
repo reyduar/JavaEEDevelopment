@@ -1,11 +1,12 @@
 package ar.iariel.siscom.util;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 
 
 /**
- * 
+ * Date 
  * @author Ariel Duarte
  * Configuración Hibernate
  */
@@ -15,14 +16,18 @@ import org.hibernate.cfg.Configuration;
  */
 public class HibernateUtil {
 	private static final SessionFactory sessionFactory;
+	public static final String HIBERNATE_SESSION = "hibernate_session";
 
 	public static SessionFactory getSessionfactory() {
 		return sessionFactory;
 	}
 
 	static{
-		sessionFactory = new Configuration().configure("ar/iariel/siscom/util/hibernate.cfg.xml").buildSessionFactory();
+		//-- Configuracion utilizando mapeamiento --//
+		//sessionFactory = new Configuration().configure("ar/iariel/siscom/util/hibernate.cfg.xml").buildSessionFactory();
 		
+		//-- Configuracion con Annotations --//
+		sessionFactory = new AnnotationConfiguration().configure("ar/iariel/siscom/util/hibernate.cfg.xml").buildSessionFactory();
 	}
 	
 	

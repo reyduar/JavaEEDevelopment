@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.Session;
 
-import ar.iariel.siscom.model.bean.Proveedor;
+import ar.iariel.siscom.model.bean.Marca;
 import ar.iariel.siscom.model.dao.HibernateDAO;
 import ar.iariel.siscom.model.dao.InterfaceDAO;
 import ar.iariel.siscom.util.HibernateUtil;
@@ -16,14 +16,14 @@ import ar.iariel.siscom.util.HibernateUtil;
  * @author Ariel Duarte
  *
  */
-public class ConsultarProveedor implements InterfaceCommand {
+public class ConsultarMarca implements InterfaceCommand {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		InterfaceDAO<Proveedor> proveedorDAO = new HibernateDAO<Proveedor>(Proveedor.class, (Session) request.getAttribute(HibernateUtil.HIBERNATE_SESSION));
-		List<Proveedor> proveedores = proveedorDAO.getsBeans();
-		request.setAttribute("proveedores", proveedores);
-		return "consulta_proveedor.jsp";
+		InterfaceDAO<Marca> marcaDAO = new HibernateDAO<Marca>(Marca.class, (Session) request.getAttribute(HibernateUtil.HIBERNATE_SESSION));
+		List<Marca> marcas = marcaDAO.getsBeans();
+		request.setAttribute("marcas", marcas);
+		return "consulta_marca.jsp";
 	}
 
 }

@@ -1,32 +1,88 @@
 package ar.iariel.siscom.model.bean;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
- * 
+ * Date : 07/10/2012
  * @author Ariel Duarte
  *
  */
+
+@Entity
+@Table(name="articulo")
 public class Articulo {
-	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="art_codigo")
 	private Integer codigo;
-	private String artbarra;
-	private Grupo grupo;
-	private TipoGrupo tipoGrupo;
-	private String artnomreal;
-	private String artnomfact;
-	private String artcodorigen;
-	private String artnropieza;
-	private Marca marca;
-	private String codigomarca;
-	private Pais pais;
-	private Double artprecact;
-	private Double artpreant;
-	private Double artpreventa;
-	private String arttpiva;
-	private Ubicacion ubicacion;
-	private Double artstockmin;
-	private String artobs;
-	private Double artivaporc;
 	
+	@Column(name="artbarra")
+	private String artbarra;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="gru_codigo")
+	private Grupo grupo;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="tg_codigo")
+	private TipoGrupo tipoGrupo;
+	
+	@Column(name="artnomreal")
+	private String artnomreal;
+	
+	@Column(name="artnomfact")
+	private String artnomfact;
+	
+	@Column(name="artcodorigen")
+	private String artcodorigen;
+	
+	@Column(name="artnropieza")
+	private String artnropieza;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="mar_codigo")
+	private Marca marca;
+	
+	@Column(name="codigomarca")
+	private String codigomarca;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="pais_codigo")
+	private Pais pais;
+	
+	@Column(name="artprecact")
+	private Double artprecact;
+	
+	@Column(name="artpreant")
+	private Double artpreant;
+	
+	@Column(name="artpreventa")
+	private Double artpreventa;
+	
+	@Column(name="arttpiva")
+	private String arttpiva;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ubica_codigo")
+	private Ubicacion ubicacion;
+	
+	@Column(name="artstockmin")
+	private Double artstockmin;
+	
+	@Column(name="artobs")
+	private String artobs;
+	
+	@Column(name="artivaporc")
+	private Double artivaporc;
 	
 	
 	public Grupo getGrupo() {
@@ -71,7 +127,6 @@ public class Articulo {
 	public void setArtbarra(String artbarra) {
 		this.artbarra = artbarra;
 	}
-	
 	public String getArtnomreal() {
 		return artnomreal;
 	}
@@ -103,7 +158,6 @@ public class Articulo {
 	public void setCodigomarca(String codigomarca) {
 		this.codigomarca = codigomarca;
 	}
-
 	public Double getArtprecact() {
 		return artprecact;
 	}
@@ -148,7 +202,12 @@ public class Articulo {
 		this.artivaporc = artivaporc;
 	}
 	
-	
-	
+	@Transient
+	public boolean isValido() {
+		if (artnomreal != null && artnomreal.length()>3 && marca != null && grupo != null && tipoGrupo != null && pais != null)
+			return true;
+		
+		return false;
+	}
 
 }

@@ -6,12 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.hibernate.Session;
 
 import ar.iariel.siscom.model.bean.Proveedor;
 import ar.iariel.siscom.model.dao.HibernateDAO;
 import ar.iariel.siscom.model.dao.InterfaceDAO;
+import ar.iariel.siscom.util.HibernateUtil;
 /**
- * 
+ * Date : 07/10/2012
  * @author Ariel Duarte
  *
  */
@@ -25,7 +27,7 @@ public class ActualizarProveedor implements InterfaceCommand {
 			BeanUtils.populate(proveedorBean, request.getParameterMap());
 			if(proveedorBean.isValido()){
 				
-				InterfaceDAO<Proveedor> proveedorDAO = new HibernateDAO<Proveedor>(Proveedor.class);
+				InterfaceDAO<Proveedor> proveedorDAO = new HibernateDAO<Proveedor>(Proveedor.class, (Session) request.getAttribute(HibernateUtil.HIBERNATE_SESSION));
 				//Integer codigo = Integer.valueOf(request.getParameter("codigo"));
 				//proveedorBean.setCodigo(codigo);
 				proveedorDAO.actualizar(proveedorBean);
@@ -35,7 +37,7 @@ public class ActualizarProveedor implements InterfaceCommand {
 				request.setAttribute("mensagem", "Ingrese campos obligatorios");
 				return "actualizar_proveedor.jsp";
 			}else{
-				InterfaceDAO<Proveedor> proveedorDAO = new HibernateDAO<Proveedor>(Proveedor.class);
+				InterfaceDAO<Proveedor> proveedorDAO = new HibernateDAO<Proveedor>(Proveedor.class, (Session) request.getAttribute(HibernateUtil.HIBERNATE_SESSION));
 				Integer codigo = Integer.valueOf(request.getParameter("codigo"));
 				request.setAttribute("proveedor", proveedorDAO.getBean(codigo));
 				return "actualizar_proveedor.jsp";

@@ -1,43 +1,65 @@
 package ar.iariel.siscom.model.bean;
 
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
- * 
+ * Date : 07/10/2012
  * @author Ariel Duarte
- * 
+ *
  */
-public class Proveedor {
-
+@Entity
+@Table(name="proveedor")
+public class Proveedor{
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="pro_codigo")
+	private Integer codigo;
 	
-	//private Ciudad ciudad;
+	@Column(name="pro_razon")
 	private String nombre;
+	
+	@Column(name="pro_ruc")
 	private String ruc;
-	private int pais;
-	private int ciudad;
+	
+	@Column(name="pais_codigo")
+	private Integer pais;
+	
+	@Column(name="ciu_codigo")
+	private Integer ciudad;
+	
+	@Column(name="pro_direc")
 	private String direccion;
+	
+	@Column(name="pro_telef")
 	private String telefono;
+	
+	@Column(name="pro_fax")
 	private String fax;
+	
+	@Column(name="pro_mail")
 	private String email;
-	private int tipo;
-	private int codigo;
+	
+	@Column(name="pro_iva")
+	private Integer tipo;
 	
 	
-
-	public int getCiudad() {
-		return ciudad;
-	}
-
-	public void setCiudad(int ciudad) {
-		this.ciudad = ciudad;
-	}
-
-	public int getCodigo() {
+	public Integer getCodigo() {
 		return codigo;
 	}
-
-	public void setCodigo(int codigo) {
+	
+	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
+	}
+	
+	public void setTipo(Integer tipo) {
+		this.tipo = tipo;
 	}
 
 	public String getNombre() {
@@ -88,7 +110,7 @@ public class Proveedor {
 		this.email = email;
 	}
 
-	public int getTipo() {
+	public Integer getTipo() {
 		return tipo;
 	}
 
@@ -96,15 +118,23 @@ public class Proveedor {
 		this.tipo = tipo;
 	}
 
-	public int getPais() {
+	public Integer getPais() {
 		return pais;
 	}
 
-	public void setPais(int pais) {
+	public void setPais(Integer pais) {
 		this.pais = pais;
 	}
+	
+	public Integer getCiudad() {
+		return ciudad;
+	}
 
-	// Para validar que no cargen los campos en blanco ni nulos
+	public void setCiudad(Integer ciudad) {
+		this.ciudad = ciudad;
+	}
+
+	@Transient
 	public boolean isValido() {
 		if (nombre == null || nombre.equals(""))
 			return false;

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.beanutils.BeanUtils;
 import org.hibernate.Session;
 
-import ar.iariel.siscom.model.bean.Proveedor;
+import ar.iariel.siscom.model.bean.Marca;
 import ar.iariel.siscom.model.dao.HibernateDAO;
 import ar.iariel.siscom.model.dao.InterfaceDAO;
 import ar.iariel.siscom.util.HibernateUtil;
@@ -17,23 +17,17 @@ import ar.iariel.siscom.util.HibernateUtil;
  * @author Ariel Duarte
  *
  */
-public class RegistrarProveedor implements InterfaceCommand {
+public class RegistrarMarca implements InterfaceCommand {
 
 	@Override
 	public String execute(HttpServletRequest request,HttpServletResponse response) {
-		Proveedor proveedorBean = new Proveedor();
-		//Ciudad ciudadBean = new Ciudad();
-		 //ciudadBean.setCodigo(Integer.valueOf(request.getParameter("ciu_codigo")));
-		/* Necesito capturar los valores que vienen de la peticion 
-		 * lo vamos hacer utilizando commons beanUtils
-		 */
+		Marca marcaBean = new Marca();
 		try {
-			BeanUtils.populate(proveedorBean, request.getParameterMap());
-			if(proveedorBean.isValido()){
-				//proveedorBean.setCiudad(ciudadBean);
-				InterfaceDAO<Proveedor> proveedorDAO = new HibernateDAO<Proveedor>(Proveedor.class, (Session) request.getAttribute(HibernateUtil.HIBERNATE_SESSION));
-				proveedorDAO.salvar(proveedorBean);
-				request.setAttribute("mensagem", "Proveedor "+proveedorBean.getNombre()+" registrado con éxito. :) ");
+			BeanUtils.populate(marcaBean, request.getParameterMap());
+			if(marcaBean.isValido()){
+				InterfaceDAO<Marca> marcaDAO = new HibernateDAO<Marca>(Marca.class, (Session) request.getAttribute(HibernateUtil.HIBERNATE_SESSION));
+				marcaDAO.salvar(marcaBean);
+				request.setAttribute("mensagem", "Marca Registrado con éxito : "+marcaBean.getNombre());
 			}else{
 				request.setAttribute("mensagem", "Ingrese campos obligatorios");
 			}
@@ -46,10 +40,11 @@ public class RegistrarProveedor implements InterfaceCommand {
 			request.setAttribute("mensagem", "Un problema critico con el Bean"+e.getMessage());
 			e.printStackTrace();
 		} catch (Exception e) {
-			request.setAttribute("mensagem", "No se pudo guardar el proveedor. :( "+e.getMessage());
+			request.setAttribute("mensagem", "Un problema critico con el Bean"+e.getMessage());
 			e.printStackTrace();
 		}
-		return "registro_proveedor.jsp";
+		
+		return "registro_marca.jsp";
 	}
 
 }

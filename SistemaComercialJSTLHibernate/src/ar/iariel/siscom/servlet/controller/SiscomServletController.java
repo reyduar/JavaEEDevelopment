@@ -12,6 +12,7 @@ import ar.iariel.siscom.model.command.InterfaceCommand;
 import ar.iariel.siscom.model.helper.SiscomHelper;
 
 /**
+ * Date 11/10/2012
  * @author Ariel Duarte
  * Servlet implementation class SiscomServletController
  */
