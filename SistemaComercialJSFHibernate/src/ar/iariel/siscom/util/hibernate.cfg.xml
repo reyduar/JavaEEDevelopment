@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<!--
+    File             	: hibernate.cfg.xml
+    Date             	: 24/10/2012
+    Created by    		: Ariel Duarte
+    Description         : Hibernate configuration for connection to Data Base 
+-->
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/dbsiscom</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">123</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.c3p0.min_size">1</property>
+    <property name="hibernate.c3p0.max_size">5</property>
+    <property name="hibernate.c3p0.timeout">300</property>
+    <property name="hibernate.c3p0.max_statements">50</property>
+    <property name="hibernate.c3p0.idle_test_period">5</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.format_sql">false</property>
+    <property name="hibernate.pool_sizel">10</property>
+    <property name="org.hibernate">true</property>
+    <mapping class="ar.iariel.siscom.model.bean.Proveedor"/>
+    <mapping class="ar.iariel.siscom.model.bean.Marca"/>
+    <mapping class="ar.iariel.siscom.model.bean.Pais"/>
+    <mapping class="ar.iariel.siscom.model.bean.Grupo"/>
+    <mapping class="ar.iariel.siscom.model.bean.Ubicacion"/>
+    <mapping class="ar.iariel.siscom.model.bean.TipoGrupo"/>
+    <mapping class="ar.iariel.siscom.model.bean.Ciudad"/>
+    <mapping class="ar.iariel.siscom.model.bean.Articulo"/>
+    <mapping class="ar.iariel.siscom.model.bean.FormaPago"/>
+    <mapping class="ar.iariel.siscom.model.bean.CabeceraCompra"/>
+    <mapping class="ar.iariel.siscom.model.bean.DetalleCompra"/>
+  </session-factory>
+</hibernate-configuration>
+
