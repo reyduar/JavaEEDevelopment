@@ -2,6 +2,8 @@ package ar.iariel.siscom.model.dao;
 
 import java.io.Serializable;
 import java.util.List;
+
+import ar.iariel.siscom.model.bean.CabeceraCompra;
 /**
  * Date : 07/10/2012
  * @author Ariel Duarte
@@ -17,4 +19,5 @@ public interface InterfaceDAO<T> {
 	List<T> getsBeans();
 	List<T> getBeansByExample(T Bean);
 	List<T> getBeansByIds(String atributo, List<Serializable> codigos);
+	Integer lastInsertId(String clase, String id);
 }

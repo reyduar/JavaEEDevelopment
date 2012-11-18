@@ -10,6 +10,7 @@ import org.hibernate.criterion.Example;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
+import ar.iariel.siscom.model.bean.CabeceraCompra;
 import ar.iariel.siscom.model.bean.Proveedor;
 /**
  * Date : 07/10/2012
@@ -95,18 +96,35 @@ public class HibernateDAO<T> implements InterfaceDAO<T> {
 		 return (List<Proveedor>) criteria.list();//Crea un HQL
 	}
 
+	//-- Metodo que permite obtner el ultimo codigo ingresado en una tabla --//
+	public Integer lastInsertId(String bean, String id){
+		List<Integer> resutado = new ArrayList<Integer>();
+		String query = "select c."+id+" from "+bean+" c order by c."+id+" desc limit 1";
+		resutado = (List<Integer>) session.createQuery(query).list();
+		if(resutado.get(0) != null)
+			return resutado.get(0);
+		else
+			return 1;
+	}
+	
+	
 	@Override
 	public List<T> getBeansByIds(String atributo, List<Serializable> codigos) {
-		if(codigos.size()==1){
-			List<T> resultado = new ArrayList<T>();
-			resultado.add(getBean(codigos.get(1)));
-			return resultado;
-		}else if(codigos.size() > 1){
-			Criteria crit = session.createCriteria(classe);
-			crit.add(Restrictions.in("codigo", codigos));
-			return crit.list();
+		try {
+			if(codigos.size()==1){
+				List<T> resultado = new ArrayList<T>();
+				resultado.add(getBean(codigos.get(0)));
+				return resultado;
+			}else if(codigos.size() > 1){
+				Criteria crit = session.createCriteria(classe);
+				crit.add(Restrictions.in("codigo", codigos));
+				return crit.list();
+			}
+			return new ArrayList<T>();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		return new ArrayList<T>();
+		return null;
 	}
 
 	

@@ -9,6 +9,7 @@ import org.hibernate.classic.Session;
 
 import ar.iariel.siscom.model.bean.Articulo;
 import ar.iariel.siscom.model.bean.Ciudad;
+import ar.iariel.siscom.model.bean.FormaPago;
 import ar.iariel.siscom.model.bean.Proveedor;
 import ar.iariel.siscom.model.dao.ArticuloDAO;
 import ar.iariel.siscom.model.dao.HibernateDAO;
@@ -56,7 +57,20 @@ public class CompraBackingBean {
 		return selectProveedor;
 	}
 	
-	//-- Para listado de articulos de la tabla JSF --//
+	//-- Listado de operaciones para el dropdown --//
+	public List<SelectItem> getOperaciones(){
+		Session session = FacesContextUtil.getRequestSession(); 
+		InterfaceDAO<FormaPago> operacionDAO = new HibernateDAO<FormaPago>(FormaPago.class, session);
+		List<SelectItem> selectOperaciones = new ArrayList<SelectItem>();
+		//selectOperaciones.add(new SelectItem(null, "Seleccione operacion..."));
+		 for (FormaPago op : operacionDAO.getsBeans()) {
+			 selectOperaciones.add(new SelectItem(op.getCodigo().toString(), op.getNombre()));
+		}
+		return selectOperaciones;
+		
+	}
+	
+	//-- Listado de articulos de la tabla JSF --//
 	public List<Articulo> getArticulos(){
 		List<Articulo> resultado = new ArrayList<Articulo>();
 		Session session = FacesContextUtil.getRequestSession(); 
@@ -82,7 +96,7 @@ public class CompraBackingBean {
 		//return articuloDAO.getsBeans();
 	}
 
-	//-- Getter y Setter de compraBean -//
+	//-- Getter y Setter de compraBean --//
 	public CompraBean getCompraBean() {
 		return compraBean;
 	}

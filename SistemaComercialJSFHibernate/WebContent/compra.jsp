@@ -10,14 +10,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Nota de Fiscal de Proveedor</title>
+<title>Factura de Proveedor</title>
 <link rel="stylesheet" href="css/principal.css"  type="text/css" />
 </head>
 <body>
 	<f:view>
 	<!-- Div para mensaje de error  -->
 		<htm:div id="divPrincipal" styleClass="corpoPrincipal">
-			<htm:h1 id="titulo">Sistema Comercial - Nota Fiscal de Proveedor</htm:h1>
+			<htm:h1 id="titulo">Sistema Comercial - Factura de Proveedor</htm:h1>
 			<htm:div id="mensajes" rendered="#{not empty facesContext.maximumSeverity }">
 			<h:panelGrid id="panelMensajes" columns="2" >
 				 <h:graphicImage value="images/delete-comment-red.gif" title="Error!"></h:graphicImage>
@@ -120,30 +120,108 @@
 				
 			</htm:div><!-- Div cuerpo de izquierda  -->
 				<htm:div styleClass="corpoDireita" ><!-- Div cuerpo de Derecho  -->
-					<h:form id="notaFiscal">
-					<t:div id="nrNF" forceId="true">
-							<h:outputText styleClass="inputNrNF" value="Factura Proveedor Nº: "  />
-							<h:inputText value="#{compraBean.compra.numero}" required="true" requiredMessage="Ingrese Nº de Factura.">
-								<f:converter converterId="javax.faces.Long"  />
-								<f:validateLongRange maximum="999999" minimum="1"  />
-							</h:inputText><htm:br/>
-							<htm:small style="font-size:10px;">Operación</htm:small>
-							<h:selectOneMenu id="selectTipOpe" value="#{compraBean.codigoTipOpe}">
-								<f:selectItems value="#{compraBackingBean.operaciones}" />
-							</h:selectOneMenu>
-					</t:div>
-						<htm:div styleClass="previewNotaFiscal"  rendered="#{not empty compraBean.compra.proveedor}">
+					<htm:div styleClass="previewNotaFiscal"  rendered="#{not empty compraBean.compra.proveedor}">
+						<h:form id="notaFiscal">
+								<t:div id="nrNF" forceId="true">
+									<h:outputText styleClass="inputNrNF" value="Factura Proveedor Nº: "  />
+									<h:inputText value="#{compraBean.compra.nroFactura}" required="true" requiredMessage="Ingrese Nº de Factura."
+									style="width:300px; height:30px">
+										<f:converter converterId="javax.faces.Long"  />
+										<f:validateLongRange maximum="9999999" minimum="1"  />
+									</h:inputText>
+									<br />
+									<htm:small style="font-size:10px;">Operación</htm:small>
+									<h:selectOneMenu id="selectTipOpe" value="#{compraBean.operacion.codigo}">
+										<f:selectItems value="#{compraBackingBean.operaciones}" />
+									</h:selectOneMenu>
+								</t:div>
+						
 							<htm:div id="dadosNotaFiscal">
-							<htm:p>Nombre/Razón Social:</htm:p><htm:big><h:outputText value="#{compraBean.compra.proveedor.nombre}"/></htm:big>
-							<htm:p>Ruc:</htm:p><htm:big><h:outputText value="#{compraBean.compra.proveedor.ruc}"/></htm:big>
-							<htm:p>Ciudad:</htm:p><htm:big><h:outputText value="#{compraBean.compra.proveedor.ciudad.nombre}"/></htm:big>
-							<htm:p>Dirección:</htm:p><htm:big><h:outputText value="#{compraBean.compra.proveedor.direccion}"/></htm:big>
-							<htm:p>Teléfono:</htm:p><htm:big><h:outputText value="#{compraBean.compra.proveedor.telefono}"/></htm:big>
-						</htm:div>
+								<htm:p>Nombre/Razón Social:</htm:p><htm:big><h:outputText value="#{compraBean.compra.proveedor.nombre}"/></htm:big>
+								<htm:p>Ruc/DNI/CI:</htm:p><htm:big><h:outputText value="#{compraBean.compra.proveedor.ruc}"/></htm:big>
+								<htm:p>Ciudad:</htm:p><htm:big><h:outputText value="#{compraBean.compra.proveedor.ciudad.nombre}"/></htm:big>
+								<htm:p>Dirección:</htm:p><htm:big><h:outputText value="#{compraBean.compra.proveedor.direccion}"/></htm:big>
+								<htm:p>Teléfono:</htm:p><htm:big><h:outputText value="#{compraBean.compra.proveedor.telefono}"/></htm:big>
+								<t:div id="calendario" forceId="true">
+									<htm:p>
+										<h:outputText value="Fecha Emisión:" />
+										<t:inputCalendar value="#{compraBean.compra.fecha}" renderAsPopup="true" renderPopupButtonAsImage="true"
+											popupButtonImageUrl="images/search-blue.gif"  style="width:100px; height:10px"
+										></t:inputCalendar>
+									</htm:p>
+<%-- 									<htm:p> --%>
+<%-- 										<h:outputText value="Fecha de Entrada:" /> --%>
+<%-- 										<t:inputCalendar value="#{compraBean.compra.fecha}" renderAsPopup="true" renderPopupButtonAsImage="true" --%>
+<%-- 											popupButtonImageUrl="images/search-blue.gif" --%>
+<%-- 										></t:inputCalendar> --%>
+<%-- 									</htm:p> --%>
+								</t:div><!-- /calendario -->
+							</htm:div><!-- Div datos de la factura -->
+							<t:dataTable id="produtosNotaFiscal" rendered="#{not empty compraBean.compra.detalle}"
+								value="#{compraBean.compra.detalle}" var="detalle" rowClasses="linhaEscuraNF, linhaClaraNF"
+								styleClass="dataTableNotaFiscal" width="100%">
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Nombre"></h:outputText>
+									</f:facet>
+									<h:outputText value="#{detalle.articulo.artnomreal}"></h:outputText>	
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Cod."></h:outputText>
+									</f:facet>
+									<h:outputText value="#{detalle.articulo.artcodorigen}"></h:outputText>	
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Precio"></h:outputText>
+									</f:facet>
+									<h:inputText value="#{detalle.precioUnitario}" converterMessage="Precio: Se espera valor numerico"
+										validatorMessage="Valor esperado: Esperando valor entre 10000 e 0">
+										<f:converter converterId="javax.faces.Double" />
+										<f:validateDoubleRange maximum="10000" minimum="0" />
+									</h:inputText>
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Cant."></h:outputText>
+									</f:facet>
+									<h:inputText value="#{detalle.cantidad}" converterMessage="Cantidad: Se espera valor numerico"
+										validatorMessage="Cantidad: Esperando valor entre 10000 e 0">
+										<f:converter converterId="javax.faces.Integer" />
+										<f:validateDoubleRange maximum="10000" minimum="0" />
+								</h:inputText>
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Total"></h:outputText>
+									</f:facet>
+									<h:inputText value="#{detalle.subtotal}" converterMessage="Subtotal: Se espera valor numerico"
+										validatorMessage="Subtotal:  Esperando valor entre 1000000 e 0">
+										<f:converter converterId="javax.faces.Double" />
+										<f:validateDoubleRange maximum="1000000" minimum="0" />
+									</h:inputText>
+									<f:facet name="footer">
+										<h:inputText value="#{compraBean.compra.total}" readonly="true" ></h:inputText>
+									</f:facet><!-- footer para campo total  -->
+								</h:column>
+								<h:column>
+									<h:selectBooleanCheckbox id="excluirProduto"
+									value="#{compraBean.articulosExcluidos[detalle.articulo.codigo]}">
+									</h:selectBooleanCheckbox>
+								</h:column>
+								<f:facet name="footer">
+									<h:commandButton styleClass="panelBotaoSubtrair" value="Excluir"
+										rendered="#{not empty compraBean.compra.detalle}" actionListener="#{compraBean.excluirArticulo}"></h:commandButton>
+								</f:facet>
+							</t:dataTable>
+							<h:commandButton styleClass="panelBotaoConfirmar" value="Guardar"
+							rendered="#{not empty compraBean.compra.detalle}" action="#{compraBean.guardarFacturaCompra}"
+							onclick="return confirm('¿Confirmar ingreso de Factura de Compra?');"
+							></h:commandButton>
 					</h:form>
 				</htm:div><!-- Div vista de nota fiscal  -->
-						
-				</htm:div><!-- Div cuerpo de Derecho  -->
+			</htm:div><!-- Div cuerpo de Derecho  -->
 		</htm:div><!-- Div principal  -->
 	</f:view>
 </body>

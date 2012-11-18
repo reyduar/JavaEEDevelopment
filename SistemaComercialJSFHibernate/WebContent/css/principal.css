@@ -59,7 +59,7 @@ fieldset
 {
 	margin-top: 10px;	
 	border: 2px solid #369;
-	background-color: #CCF;
+	background-color: #deecf3;
 }
 div#dadosNotaFiscal
 {
@@ -308,8 +308,8 @@ div#divPrincipal h1#titulo
 	background-position: 95% 50%;
 	background-repeat: no-repeat;
 	font-family: Corbel;
-	border-bottom: 7px solid #6CC;
-	background-color: #369;
+	border-bottom: 7px solid #74a7c1;
+	background-color: #83bcd9;
 	color: #FFF;
 	padding: 20px 50px;
 	margin-bottom: 0;
