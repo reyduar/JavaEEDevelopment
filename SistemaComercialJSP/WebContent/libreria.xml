@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<libreria>
+	<api>
+		<nombre>MYSQL-connector</nombre>
+		<valor>Java</valor>
+	</api>
+	<api>
+		<nombre>JSF-RichFaces</nombre>
+		<apellido>Java</apellido>
+	</api>
+</libreria>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT cgeol-request (me, contact*)>
+<!ELEMENT me (number, latitude, longitude, date, description)>
+<!ELEMENT number (#PCDATA)>
+<!ELEMENT latitude (#PCDATA)>
+<!ELEMENT longitude (#PCDATA)>
+<!ELEMENT date (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT contact (#PCDATA)>
