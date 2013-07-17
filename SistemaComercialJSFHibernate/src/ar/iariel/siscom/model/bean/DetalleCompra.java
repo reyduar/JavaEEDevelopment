@@ -29,7 +29,7 @@ public class DetalleCompra {
 	private Articulo articulo;
 	
 	@Column(name="det_com_can")
-	private Double cantidad;
+	private Integer cantidad;
 	
 	@Column(name="det_com_pre")
 	private Double precioUnitario;
@@ -76,11 +76,11 @@ public class DetalleCompra {
 		this.articulo = articulo;
 	}
 
-	public Double getCantidad() {
+	public Integer getCantidad() {
 		return cantidad;
 	}
 
-	public void setCantidad(Double cantidad) {
+	public void setCantidad(Integer cantidad) {
 		this.cantidad = cantidad;
 	}
 

@@ -2,6 +2,8 @@ package ar.iariel.siscom.model.dao;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -63,7 +65,10 @@ public class HibernateDAO<T> implements InterfaceDAO<T> {
 
 	@Override
 	public List<T> getsBeans() {
-		List<T> beans = (List<T>)session.createCriteria(classe).list();
+		Criteria criteria = session.createCriteria(classe);
+		criteria.setCacheable(true);// Se define a la consulta que trabaje con la cache
+		//List<T> beans = (List<T>)session.createCriteria(classe).list();
+		List<T> beans = (List<T>)criteria.list();
 		return beans;
 	}
 
@@ -125,6 +130,24 @@ public class HibernateDAO<T> implements InterfaceDAO<T> {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public void salvar(Collection<T> beans) {
+		Iterator<T> it = beans.iterator();
+		int i = 0;
+		// Permitira almacenar una lista de beans
+		while(it.hasNext()) {
+			session.save(it.next());
+			//-- Se verifica si son 20 beans los que se este salvando para hacer el commit en la base de datos
+			//-- ver propiedad hibernate.jdbc.batch_size de hibernate conf
+			if(i % 20 == 0 || i >= beans.size()-1){
+				session.flush();
+				session.clear();
+			}
+			i++;
+		}
+		
 	}
 
 	

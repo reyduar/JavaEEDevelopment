@@ -21,7 +21,10 @@ import ar.iariel.siscom.model.dao.InterfaceDAO;
 import ar.iariel.siscom.util.FacesContextUtil;
 
 
-
+/**
+ * @author Ariel Duarte
+ * Managed Bean : CompraBean
+ */
 public class CompraBean {
 	public Integer numeroCompra = 0;
 	private CabeceraCompra compra = new CabeceraCompra();
@@ -104,7 +107,7 @@ public class CompraBean {
 		InterfaceDAO<Articulo> articuloDAO = new HibernateDAO<Articulo>(Articulo.class, FacesContextUtil.getRequestSession()) ;
 		for (DetalleCompra dc : detalles) {
 			Articulo art = articuloDAO.getBean(dc.getArticulo().getCodigo());
-			Double newStock = art.getArtstockmin() + dc.getCantidad();
+			Integer newStock = art.getArtstockmin() + dc.getCantidad();
 			art.setArtstockmin(newStock);
 		}
 		this.compraSuccess = CabeceraCompraDAO.getBean(getCompra().getNumero());

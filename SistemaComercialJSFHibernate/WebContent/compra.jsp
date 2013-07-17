@@ -6,6 +6,7 @@
 <%@ taglib uri="http://myfaces.apache.org/trinidad/html" prefix="trh" %>
 <%@ taglib uri="http://myfaces.apache.org/tomahawk" prefix="t" %>
 <%@ taglib uri="http://jsftutorials.net/htmLib" prefix="htm" %>
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,15 +16,15 @@
 </head>
 <body>
 	<f:view>
-	<!-- Div para mensaje de error  -->
+	
 		<htm:div id="divPrincipal" styleClass="corpoPrincipal">
-			<htm:h1 id="titulo">Sistema Comercial - Factura de Proveedor</htm:h1>
-			<htm:div id="mensajes" rendered="#{not empty facesContext.maximumSeverity }">
-			<h:panelGrid id="panelMensajes" columns="2" >
-				 <h:graphicImage value="images/delete-comment-red.gif" title="Error!"></h:graphicImage>
-				 <h:messages></h:messages>
-			</h:panelGrid>
-			</htm:div><!-- Div mensajes de error  -->
+			<c:import url="cabecera.jsp">
+				<c:param name="titulo" value="Sistema Comercial - Factura de Proveedor"></c:param>
+			</c:import><!-- import: para barra de cabecera (JSTL) -->
+			<c:import url="menu.jsp">
+			</c:import>
+			
+			<c:import url="mensajes.jsp"></c:import><!-- import: para mensaje de error (JSTL) -->
 			<htm:div styleClass="corpoEsquerda">
 			
 				<htm:fieldset styleClass="borda"><!-- fieldset de proveedor  -->

@@ -13,7 +13,21 @@ public class ListenerPhasesJSF implements PhaseListener {
 
 	@Override
 	public void beforePhase(PhaseEvent fase) {
-		System.out.println("Antes fase :" + fase.getPhaseId());
+		//System.out.println("Antes fase :" + fase.getPhaseId());
+		
+		
+		
+		//-- Generamos una verificacion donde solo un usuario autenticado pueda navegar por el sistema --//
+		if(fase.getPhaseId().equals(PhaseId.RENDER_RESPONSE)){
+			LoginBean loginBean = (LoginBean)FacesContextUtil.getSessionAttribute("loginBean");//Castemos porque un object es devuelto
+			
+			//-- Verificamos si el usuario esta logueado --//
+			if(loginBean == null || !loginBean.getAutenticado()){
+				FacesContextUtil.setNavigation("login");
+			}
+		}
+		
+		
 		if(fase.getPhaseId().equals(PhaseId.RESTORE_VIEW)){
 			Session session =  HibernateUtil.getSessionfactory().openSession();
 			session.beginTransaction();

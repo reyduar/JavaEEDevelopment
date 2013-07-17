@@ -21,6 +21,16 @@
     <property name="hibernate.c3p0.max_statements">50</property>
     <property name="hibernate.c3p0.idle_test_period">5</property>
     <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.jdbc.batch_size">20</property>
+    
+	<!--     Configuracion de Cache de Hibernate para optimizacion de consultas-->
+	<!--     Cache 1º Nivel -->
+	<property name="hibernate.cache.use_query_cache">true</property>
+    <property name="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
+    <property name="hibernate.generate_statistics">true</property>
+    <!--     Cache 2º Nivel -->
+    <property name="hibernate.cache.use_second_level_cache">true</property>
+    
     <property name="hibernate.format_sql">false</property>
     <property name="hibernate.pool_sizel">10</property>
     <property name="org.hibernate">true</property>
@@ -35,6 +45,9 @@
     <mapping class="ar.iariel.siscom.model.bean.FormaPago"/>
     <mapping class="ar.iariel.siscom.model.bean.CabeceraCompra"/>
     <mapping class="ar.iariel.siscom.model.bean.DetalleCompra"/>
+    <mapping class="ar.iariel.siscom.model.bean.Funcionario"/>
+    <mapping class="ar.iariel.siscom.model.bean.TipoAjuste"/>
+    <mapping class="ar.iariel.siscom.model.bean.Ajuste"/>
   </session-factory>
 </hibernate-configuration>
 

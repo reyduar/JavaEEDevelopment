@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -24,6 +26,7 @@ import org.hibernate.annotations.CascadeType;
  */
 
 @Entity
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 @Table(name="compra")
 public class CabeceraCompra {
 	@Id
@@ -80,6 +83,7 @@ public class CabeceraCompra {
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="compra")
 	@Cascade(value={CascadeType.SAVE_UPDATE})
+	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 	@JoinColumn(name="com_nro", insertable=true, updatable=true)
 	private Set<DetalleCompra> detalle ;
 	

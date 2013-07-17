@@ -10,11 +10,7 @@
 <f:subview id="paginaMenu">
 	<t:div id="menu" forceId="true">
 		<htm:ul>
-			<htm:li><h:outputLink value="compra.faces">Factura Compra</h:outputLink></htm:li>
-			<htm:li><h:outputLink value="ajuste_stock.faces">Solicitar Ajuste</h:outputLink></htm:li>
-			<htm:li><h:outputLink value="autoriza_ajuste_stock.faces">Autorizar Ajustes</h:outputLink></htm:li>
-			<htm:li><h:outputLink value="confirma_ajuste_stock.faces">Confirmar Ajustes</h:outputLink></htm:li>
-			<htm:li><h:form><h:commandButton styleClass="botaoSair" value="Salir" action="#{loginBean.salir}">
+			<htm:li><h:form><h:commandButton styleClass="botaoSair" value="Sair" action="#{loginBean.sair}">
 			</h:commandButton> </h:form></htm:li>
 		</htm:ul>
 	</t:div>

@@ -15,14 +15,18 @@ import ar.iariel.siscom.model.dao.ArticuloDAO;
 import ar.iariel.siscom.model.dao.HibernateDAO;
 import ar.iariel.siscom.model.dao.InterfaceDAO;
 import ar.iariel.siscom.util.FacesContextUtil;
-
+/**
+ * @author Ariel Duarte
+ * Backing Bean : CompraBackingBean
+ */
 public class CompraBackingBean {
 	
 	private Proveedor proveedor = new Proveedor();
 	private Articulo articulo = new Articulo();
 	private Ciudad ciudad = new Ciudad();
 	private CompraBean compraBean;
-	
+	List<SelectItem> proveedores;
+	List<Articulo> articulos;
 
 	//-- Metodos que permite hacer la busqueda de proveedor --//
 	public Proveedor getProveedor() {
@@ -35,28 +39,30 @@ public class CompraBackingBean {
 
 	//-- Metodo para rellenar el DropDown con los Proveedores --//
 	public List<SelectItem> getProveedores(){
-		Session session = FacesContextUtil.getRequestSession(); 
-		
-		InterfaceDAO<Proveedor> proveedorDAO = new HibernateDAO<Proveedor>(Proveedor.class, session);
-		
-		//-- En el caso de que algun elemento este null el lo pueda encontrar igual pero como vacio --//
-		if(proveedor.getNombre() != null && proveedor.getNombre().equals("")){
-			proveedor.setNombre(null);
+		if(proveedores == null){
+			Session session = FacesContextUtil.getRequestSession(); 
+			
+			InterfaceDAO<Proveedor> proveedorDAO = new HibernateDAO<Proveedor>(Proveedor.class, session);
+			
+			//-- En el caso de que algun elemento este null el lo pueda encontrar igual pero como vacio --//
+			if(proveedor.getNombre() != null && proveedor.getNombre().equals("")){
+				proveedor.setNombre(null);
+			}
+			if(proveedor.getRuc() != null && proveedor.getRuc().equals("")){
+				proveedor.setRuc(null);
+			}
+			
+			List<Proveedor> proveedoresByExample = proveedorDAO.getBeansByExample(proveedor);
+			
+			proveedores = new ArrayList<SelectItem>();
+			proveedores.add(new SelectItem(null, "Seleccione proveedor..."));
+			 for (Proveedor p : proveedoresByExample) {
+				 proveedores.add(new SelectItem(p.getCodigo().toString(), p.getNombre()));
+			}
 		}
-		if(proveedor.getRuc() != null && proveedor.getRuc().equals("")){
-			proveedor.setRuc(null);
-		}
-		
-		List<Proveedor> proveedores = proveedorDAO.getBeansByExample(proveedor);
-		
-		List<SelectItem> selectProveedor = new ArrayList<SelectItem>();
-		selectProveedor.add(new SelectItem(null, "Seleccione proveedor..."));
-		 for (Proveedor p : proveedores) {
-			 selectProveedor.add(new SelectItem(p.getCodigo().toString(), p.getNombre()));
-		}
-		return selectProveedor;
+			
+		return proveedores;
 	}
-	
 	//-- Listado de operaciones para el dropdown --//
 	public List<SelectItem> getOperaciones(){
 		Session session = FacesContextUtil.getRequestSession(); 
@@ -72,27 +78,30 @@ public class CompraBackingBean {
 	
 	//-- Listado de articulos de la tabla JSF --//
 	public List<Articulo> getArticulos(){
-		List<Articulo> resultado = new ArrayList<Articulo>();
-		Session session = FacesContextUtil.getRequestSession(); 
-		InterfaceDAO<Articulo> articuloDAO = new HibernateDAO<Articulo>(Articulo.class, session);
-		if(getArticulo().getArtnomreal() != null && getArticulo().getArtnomreal().equals("")){
-			articulo.setArtnomreal(null);
+		if(articulos==null){
+			articulos = new ArrayList<Articulo>();
+			Session session = FacesContextUtil.getRequestSession(); 
+			InterfaceDAO<Articulo> articuloDAO = new HibernateDAO<Articulo>(Articulo.class, session);
+			if(getArticulo().getArtnomreal() != null && getArticulo().getArtnomreal().equals("")){
+				articulo.setArtnomreal(null);
+			}
+			
+			List<Articulo> articulosByExample = articuloDAO.getBeansByExample(articulo);
+			for (Articulo a : articulosByExample) {
+				articulos.add(a);
+			}
+			//TODO: Este codigo es para un filtro de proveedor por producto, pero que no lo tenemos en implementado en esta aplicacion
+			/*
+			ArticuloDAO articuloDAO = new ArticuloDAO(session); -----para usar la clase ArticuloDAO
+			if(compraBean.getCompra().getProveedor() != ){
+				getArticulo().setProveedor(compraBean.getCompra().getProveedor());
+				return articuloDAO.getArticuloPorProveedor(getArticulo());
+			}
+			*/
 		}
 		
-		List<Articulo> articulos = articuloDAO.getBeansByExample(articulo);
-		for (Articulo a : articulos) {
-			resultado.add(a);
-		}
-		//TODO: Este codigo es para un filtro de proveedor por producto, pero que no lo tenemos en implementado en esta aplicacion
-		/*
-		ArticuloDAO articuloDAO = new ArticuloDAO(session); -----para usar la clase ArticuloDAO
-		if(compraBean.getCompra().getProveedor() != ){
-			getArticulo().setProveedor(compraBean.getCompra().getProveedor());
-			return articuloDAO.getArticuloPorProveedor(getArticulo());
-		}
-		*/
 		
-		return resultado;
+		return articulos;
 		//return articuloDAO.getsBeans();
 	}
 

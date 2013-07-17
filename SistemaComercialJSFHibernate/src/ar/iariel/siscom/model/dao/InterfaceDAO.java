@@ -1,6 +1,7 @@
 package ar.iariel.siscom.model.dao;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 import ar.iariel.siscom.model.bean.CabeceraCompra;
@@ -15,6 +16,7 @@ public interface InterfaceDAO<T> {
 	void salvar(T bean);
 	void actualizar(T bean);
 	void eliminar(T bean);
+	void salvar(Collection<T> beans);
 	T getBean(Serializable codigo);
 	List<T> getsBeans();
 	List<T> getBeansByExample(T Bean);

@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 /**
  * Date : 07/10/2012
  * @author Ariel Duarte
@@ -18,6 +21,7 @@ import javax.persistence.Transient;
  */
 
 @Entity
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 @Table(name="articulo")
 public class Articulo {
 	@Id
@@ -76,7 +80,7 @@ public class Articulo {
 	private Ubicacion ubicacion;
 	
 	@Column(name="artstockmin")
-	private Double artstockmin;
+	private Integer artstockmin;
 	
 	@Column(name="artobs")
 	private String artobs;
@@ -183,10 +187,10 @@ public class Articulo {
 		this.arttpiva = arttpiva;
 	}
 
-	public Double getArtstockmin() {
+	public Integer getArtstockmin() {
 		return artstockmin;
 	}
-	public void setArtstockmin(Double artstockmin) {
+	public void setArtstockmin(Integer artstockmin) {
 		this.artstockmin = artstockmin;
 	}
 	public String getArtobs() {
@@ -209,5 +213,5 @@ public class Articulo {
 		
 		return false;
 	}
-
+	
 }
